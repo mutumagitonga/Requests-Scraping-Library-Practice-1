@@ -32,10 +32,41 @@ response = fetch_html_data(url)  # Fetch web data using requests library
 soup = convert_web_data_to_beautiful_soup_obj(response)  # Web data into BeautifulSoup object
 
 
-def get_price_with_soup_find_function(soup_object):
-    price = soup_object.find("h4", {"class": "float-end price card-title pull-right"})
-    return price.string
+def get_item_title_with_soup_find_function(soup_object):
+    try:
+        item_name = soup_object.find("a", class_="title")
+        return item_name.string
+    except Exception as e:
+        print("Stopped: ", e)
 
 
-tablet_price_string = get_price_with_soup_find_function(soup)
-print(tablet_price_string)
+item_name_string = get_item_title_with_soup_find_function(soup)
+print(f"\nItem name: {item_name_string}")
+
+
+def get_item_price_with_soup_find_function(soup_object):
+    try:
+        item_price = soup_object.find("h4", {"class": "float-end price card-title pull-right"})
+        return item_price.string
+    except Exception as e:
+        print("Stopped: ", e)
+
+
+item_price_string = get_item_price_with_soup_find_function(soup)  # Return item price as str
+print(f"Item price: {item_price_string}")
+
+
+def get_item_description_with_soup_find_function(soup_object):
+    try:
+        item_description = soup_object.find("p", {"class": "description card-text"})
+        return item_description.string
+    except Exception as e:
+        print("Stopped: ", e)
+
+
+item_description_string = get_item_description_with_soup_find_function(soup)
+print(f"Item description: {item_description_string}")
+
+
+# BeautifulSoup find() only finds the data from the first tags it encounters...
+# ...Leaving tags with similar tags ignored. Hence can't scrape all items with similar tags
