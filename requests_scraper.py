@@ -18,6 +18,7 @@ except TypeError as e:
     print('Stopped:', e)
 
 # Parse returned HTML resource using BeautifulSoup library
+soup = None  # Declare & initialize BeautifulSoup object variable in global scope
 if res:
     print("Data received successfully! Creating a BeautifulSoup object...")
     # 'lxml' is faster & more lenient HTML parser than bs4 inbuilt 'html.parser'
@@ -25,3 +26,4 @@ if res:
     print("Success! BeautifulSoup object created!")
 else:
     print("BeautifulSoup can't run, response received:", res)
+print(soup)
