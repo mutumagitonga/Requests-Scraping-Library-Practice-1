@@ -31,9 +31,17 @@ if res:
 else:
     print("BeautifulSoup can't run, response received:", res)
 
-# Understanding HTML attributes within tags
-header_tag = soup.header  # Access header tag
-header_tag_attrs = header_tag.attrs  # Access header tag attributes
-print(header_tag_attrs['role'])
+# # Understanding HTML ATTRIBUTES within tags
+# header_tag = soup.header  # Access header tag
+# header_tag_attrs = header_tag.attrs  # Access header tag attributes
+# print(header_tag_attrs['role'])
 
+# Understanding NAVIGABLE STRINGS: Usually with p, h1 etc
+p_tag = soup.div.p  # Returns the content of the p tag as an object
+p_tag_string = p_tag.string  # Converts the p_tag content to an iterable string
+print([x for x in p_tag_string])  # Access individual chars in p_tag_string & print
+
+span_tag = soup.header.div.a.button.span  # Returns the content of the p tag as an object
+span_tag_string = span_tag.string  # Converts the p_tag content to an iterable string
+print([x for x in span_tag_string])  # Access individual chars in p_tag_string & print
 
