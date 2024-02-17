@@ -1,5 +1,6 @@
 import requests as req
 from bs4 import BeautifulSoup
+import pandas as pd
 
 fetch_url = "https://webscraper.io/test-sites/e-commerce/allinone/computers/tablets"
 
@@ -51,3 +52,26 @@ items_descriptions = get_all_items_descriptions(soup)
 print(items_descriptions)  # Array of p tags with descriptions
 items_descriptions_list = [x.text for x in items_descriptions]  # Only descriptions into a list (Alt: Use for-loop)
 print(items_descriptions_list)
+
+
+def create_pandas_dataframe_from_items_lists(prices, descriptions):
+    print("\nCreating dataframe from item lists...")
+    df = pd.DataFrame({"Description": descriptions, "Price": prices})
+    print("Done!")
+    return df
+
+
+tablets_df = create_pandas_dataframe_from_items_lists(descriptions=items_descriptions_list, prices=items_prices_list)
+print(tablets_df)
+
+
+def write_items_dataframe_into_csv_file(df):
+    print("\nWriting items dataframe into csv...")
+    items_csv = df.to_csv("item_descriptions_and_prices.csv", index=False)  # False: Drop idx
+    print("Done!")
+    return items_csv
+
+
+write_items_dataframe_into_csv_file(tablets_df)
+tablets_csv = pd.read_csv('item_descriptions_and_prices.csv')  # Read created csv
+print(tablets_csv)  # Can only print csv after reading it
