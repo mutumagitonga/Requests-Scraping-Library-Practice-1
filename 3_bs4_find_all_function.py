@@ -28,3 +28,15 @@ def convert_web_data_to_beautiful_soup_obj(web_data):
 response = fetch_html_data(fetch_url)
 soup = convert_web_data_to_beautiful_soup_obj(response)
 
+
+def get_all_items_prices(soup_obj):
+    print("\nGetting all items' prices...")
+    prices = soup.findAll("h4", class_="float-end price card-title pull-right")
+    return prices
+
+
+items_prices = get_all_items_prices(soup)
+print(items_prices)  # Array of h4 tags with prices
+items_prices_arr = [x.text for x in items_prices]  # Only prices into a list (Alt: Use for-loop)
+print(items_prices_arr)
+
