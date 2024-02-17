@@ -19,7 +19,7 @@ def fetch_html_data(web_address):
 
 def convert_web_data_to_beautiful_soup_obj(web_data):
     try:
-        print("Creating BeautifulSoup object...")
+        print("\nCreating BeautifulSoup object...")
         # 'lxml' is faster & more lenient HTML parser than bs4 inbuilt 'html.parser'
         soup_obj = BeautifulSoup(web_data.text, "lxml")
         print("Success! BeautifulSoup object created!")
@@ -33,6 +33,7 @@ soup = convert_web_data_to_beautiful_soup_obj(response)  # Web data into Beautif
 
 
 def get_item_title_with_soup_find_function(soup_object):
+    print("\nGetting item title...")
     try:
         item_name = soup_object.find("a", class_="title")
         return item_name.string
@@ -41,10 +42,11 @@ def get_item_title_with_soup_find_function(soup_object):
 
 
 item_name_string = get_item_title_with_soup_find_function(soup)
-print(f"\nItem name: {item_name_string}")
+print(f"Item name: {item_name_string}")
 
 
 def get_item_price_with_soup_find_function(soup_object):
+    print("\nGetting item price...")
     try:
         item_price = soup_object.find("h4", {"class": "float-end price card-title pull-right"})
         return item_price.string
@@ -57,6 +59,7 @@ print(f"Item price: {item_price_string}")
 
 
 def get_item_description_with_soup_find_function(soup_object):
+    print("\nGetting item description...")
     try:
         item_description = soup_object.find("p", {"class": "description card-text"})
         return item_description.string
