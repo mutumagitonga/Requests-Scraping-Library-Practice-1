@@ -40,3 +40,14 @@ print(items_prices)  # Array of h4 tags with prices
 items_prices_arr = [x.text for x in items_prices]  # Only prices into a list (Alt: Use for-loop)
 print(items_prices_arr)
 
+
+def get_all_items_descriptions(soup_obj):
+    print("\nGetting all items' descriptions...")
+    descriptions = soup.findAll("p", class_="description card-text")
+    return descriptions
+
+
+items_descriptions = get_all_items_descriptions(soup)
+print(items_descriptions)  # Array of p tags with descriptions
+items_descriptions_arr = [x.text for x in items_descriptions]  # Only descriptions into a list (Alt: Use for-loop)
+print(items_descriptions_arr)
